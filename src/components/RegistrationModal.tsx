@@ -26,7 +26,7 @@ const PAGEANT_REGISTRY: RegistryItem[] = [
   {
     id: "miss-india",
     title: "Forever Miss India",
-    description: "The supreme crowning achievement for unmarried women, championing poised representation & social voice.",
+    description: "The supreme crowning achievement for unmarried women, championing poised representation & national voice.",
     query: "miss-india",
     icon: Crown,
     badge: "National Crown",
@@ -61,8 +61,8 @@ const PAGEANT_REGISTRY: RegistryItem[] = [
   },
   {
     id: "mrs-world",
-    title: "Mrs World Representative",
-    description: "The ultimate peak of global prestige, sending India's finest to compete on the global sovereign runway.",
+    title: "Forever Mrs World",
+    description: "The ultimate peak of global prestige, sending India's finest to compete on the global Mrs World stage.",
     query: "mrs-world",
     icon: Crown,
     badge: "Global Zenith",
@@ -70,7 +70,7 @@ const PAGEANT_REGISTRY: RegistryItem[] = [
   },
   {
     id: "fashion-week",
-    title: "Forever Fashion Week Runway",
+    title: "Forever Fashion Week",
     description: "Elite national fashion showcase for pioneer designers, handloom weavers, and haute couture models.",
     query: "fashion-week",
     icon: Star,
@@ -100,7 +100,7 @@ const AWARD_REGISTRY: RegistryItem[] = [
   },
   {
     id: "business",
-    title: "Business Leadership Awards",
+    title: "Business Awards",
     description: "The gold benchmark for stellar corporate strategy, exceptional brand scaling, and green tech innovation.",
     query: "business",
     icon: Briefcase,
@@ -118,7 +118,7 @@ const AWARD_REGISTRY: RegistryItem[] = [
   },
   {
     id: "youth",
-    title: "Outstanding Youth Icon",
+    title: "Outstanding Youth Icon Award",
     description: "Honoring change-makers under 30 driving positive cultural, science, or athletic revolutions.",
     query: "youth",
     icon: Sparkles,
@@ -127,7 +127,7 @@ const AWARD_REGISTRY: RegistryItem[] = [
   },
   {
     id: "scientific-innovation",
-    title: "Scientific Innovation Laurels",
+    title: "International Laurels & Scientific Innovation",
     description: "Validating breakthrough clinical research, green engineering patents, and academic milestones.",
     query: "scientific-innovation",
     icon: ShieldCheck,
@@ -145,7 +145,7 @@ const AWARD_REGISTRY: RegistryItem[] = [
   },
   {
     id: "health-wellness",
-    title: "Health & Wellness Leadership",
+    title: "Health, Medicine & Wellness Leadership",
     description: "Acknowledging medical frontliners, public health creators, and outstanding holistic therapy advocates.",
     query: "health-wellness",
     icon: Heart,
@@ -154,7 +154,7 @@ const AWARD_REGISTRY: RegistryItem[] = [
   },
   {
     id: "education-excellence",
-    title: "Educational Excellence Honor",
+    title: "Educational & Academic Excellence Honor",
     description: "Honoring outstanding institutional developers, research deans, and pioneer classroom mentors.",
     query: "education-excellence",
     icon: GraduationCap,
@@ -163,11 +163,29 @@ const AWARD_REGISTRY: RegistryItem[] = [
   },
   {
     id: "community-upliftment",
-    title: "Community Upliftment & NGO Leader",
+    title: "Community Upliftment, CSR & NGO Leader",
     description: "Recognizing non-profit organizations, massive CSR campaigns, and green forest conservation.",
     query: "community-upliftment",
     icon: HeartHandshake,
     badge: "Sovereign Trust",
+    highlightColor: "#D4AF37"
+  },
+  {
+    id: "corporate-governance",
+    title: "Corporate Governance & Executive of the Year",
+    description: "Honoring outstanding compliance, ethical corporate operations, and stellar board of directors stewardship.",
+    query: "corporate-governance",
+    icon: Briefcase,
+    badge: "Corporate Honor",
+    highlightColor: "#D4AF37"
+  },
+  {
+    id: "heritage-preservation",
+    title: "Traditional Heritage Preservation & Crafts Honor",
+    description: "Celebrating traditional textile weavers, classical folk musicians, and curators of indigenous legacy.",
+    query: "heritage-preservation",
+    icon: Star,
+    badge: "Heritage Guardian",
     highlightColor: "#D4AF37"
   }
 ];
