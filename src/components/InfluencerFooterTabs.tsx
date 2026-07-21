@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Award, Home, UserPlus, Image, Newspaper, PhoneCall, HelpCircle, ShieldCheck, FileText, ArrowUp } from "lucide-react";
 
 export default function InfluencerFooterTabs() {
   const location = useLocation();
+  const [activeTab, setActiveTab] = useState<"registration" | "registry" | "legal">("registration");
 
   // Scroll to top of window smoothly
   const scrollToTop = () => {
@@ -53,8 +55,8 @@ export default function InfluencerFooterTabs() {
               </div>
             </div>
 
-            {/* 2. Portal Registration Links */}
-            <div className="space-y-4">
+            {/* 2. Portal Registration Links - Hidden on Mobile */}
+            <div className="space-y-4 hidden md:block">
               <h3 className="font-serif text-sm font-semibold tracking-wide text-white uppercase border-l-2 border-[#D4AF37] pl-3">
                 REGISTRATION HUB
               </h3>
@@ -77,8 +79,8 @@ export default function InfluencerFooterTabs() {
               </ul>
             </div>
 
-            {/* 3. Global & Regional Directories */}
-            <div className="space-y-4">
+            {/* 3. Global & Regional Directories - Hidden on Mobile */}
+            <div className="space-y-4 hidden md:block">
               <h3 className="font-serif text-sm font-semibold tracking-wide text-white uppercase border-l-2 border-[#D4AF37] pl-3">
                 HONOR REGISTRY
               </h3>
@@ -100,8 +102,8 @@ export default function InfluencerFooterTabs() {
               </ul>
             </div>
 
-            {/* 4. Legal & Regulatory */}
-            <div className="space-y-4">
+            {/* 4. Legal & Regulatory - Hidden on Mobile */}
+            <div className="space-y-4 hidden md:block">
               <h3 className="font-serif text-sm font-semibold tracking-wide text-white uppercase border-l-2 border-[#D4AF37] pl-3">
                 COMPLIANCE & LEGAL
               </h3>
@@ -120,6 +122,106 @@ export default function InfluencerFooterTabs() {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* MOBILE ONLY: TABBED COMPACT FOOTER SWITCHER (Reduces mobile height by 60%) */}
+            <div className="block md:hidden border-t border-stone-800/80 pt-6 mt-2">
+              {/* Segmented Tab Bar */}
+              <div className="grid grid-cols-3 gap-1 bg-stone-900/60 p-1 mb-6 border border-stone-800">
+                {[
+                  { id: "registration", label: "Registration" },
+                  { id: "registry", label: "Registry" },
+                  { id: "legal", label: "Legal" },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveTab(tab.id as "registration" | "registry" | "legal")}
+                    className={`py-2 text-[10px] font-mono font-bold tracking-wider uppercase transition-all min-h-[44px] cursor-pointer text-center ${
+                      activeTab === tab.id
+                        ? "bg-stone-800 text-[#D4AF37] shadow-sm border border-stone-700 font-bold"
+                        : "text-stone-400 hover:text-white"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Dynamic Tab Link Lists */}
+              <div className="px-1 min-h-[140px]">
+                {activeTab === "registration" && (
+                  <div className="space-y-4">
+                    <h3 className="font-serif text-xs font-semibold tracking-wide text-white uppercase border-l-2 border-[#D4AF37] pl-3 mb-4">
+                      REGISTRATION HUB
+                    </h3>
+                    <ul className="grid grid-cols-1 gap-3 text-xs font-light">
+                      {[
+                        { name: "Super Heroes Title", href: "/register?category=super-heroes" },
+                        { name: "Super Women Title", href: "/register?category=super-women" },
+                        { name: "Business Awards", href: "/register?category=business" },
+                        { name: "Forever Miss India", href: "/register?category=miss-india" },
+                        { name: "Forever Mrs India", href: "/register?category=mrs-india" },
+                        { name: "Forever Miss Teen India", href: "/register?category=miss-teen-india" }
+                      ].map((link, i) => (
+                        <li key={i}>
+                          <Link to={link.href} className="text-stone-400 hover:text-[#D4AF37] transition-colors flex items-center space-x-1.5 py-1">
+                            <span className="text-[#D4AF37]">&bull;</span>
+                            <span>{link.name}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {activeTab === "registry" && (
+                  <div className="space-y-4">
+                    <h3 className="font-serif text-xs font-semibold tracking-wide text-white uppercase border-l-2 border-[#D4AF37] pl-3 mb-4">
+                      HONOR REGISTRY
+                    </h3>
+                    <ul className="grid grid-cols-1 gap-3 text-xs font-light">
+                      {[
+                        { name: "2025 National Winners", href: "/winners-2025" },
+                        { name: "City-wise Chapters", href: "/winners/city-wise" },
+                        { name: "State-wise Chapters", href: "/winners/state-wise" },
+                        { name: "Sponsorship Alliances", href: "/sponsorship" },
+                        { name: "Official Nomination Guide", href: "/nomination-guide" }
+                      ].map((link, i) => (
+                        <li key={i}>
+                          <Link to={link.href} className="text-stone-400 hover:text-[#D4AF37] transition-colors flex items-center space-x-1.5 py-1">
+                            <span className="text-[#D4AF37]">&bull;</span>
+                            <span>{link.name}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {activeTab === "legal" && (
+                  <div className="space-y-4">
+                    <h3 className="font-serif text-xs font-semibold tracking-wide text-white uppercase border-l-2 border-[#D4AF37] pl-3 mb-4">
+                      COMPLIANCE & LEGAL
+                    </h3>
+                    <ul className="grid grid-cols-1 gap-3 text-xs font-light">
+                      {[
+                        { name: "Terms & Conditions", href: "/legal/terms" },
+                        { name: "Privacy & Data Policy", href: "/legal/privacy" },
+                        { name: "Refund & Registration Policy", href: "/legal/refund" },
+                        { name: "Grievance Redressal Board", href: "/legal/grievance" }
+                      ].map((link, i) => (
+                        <li key={i}>
+                          <Link to={link.href} className="text-stone-400 hover:text-[#D4AF37] transition-colors flex items-center space-x-1.5 py-1">
+                            <FileText size={12} className="text-stone-500" />
+                            <span>{link.name}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
 
           </div>

@@ -17,8 +17,8 @@ export default function StatsGrid() {
     <section id="fsia-stats-grid" className="bg-white border-y border-stone-200/60 py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Horizontal Touch-Swipe Carousel on Mobile & Grid on Desktop */}
-        <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-none md:overflow-visible pb-4 md:pb-0">
+        {/* Grid layout on all devices (2x2 on mobile, 4 columns on desktop) with no horizontal scrolling */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
           
           {STATS_DATA.map((stat, idx) => (
             <motion.div
@@ -27,12 +27,12 @@ export default function StatsGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="min-w-[240px] md:min-w-0 flex-shrink-0 snap-center flex flex-col items-center justify-center text-center px-6 py-6 md:py-2 border border-stone-100 md:border-0 bg-stone-50/40 md:bg-transparent rounded-none"
+              className="flex flex-col items-center justify-center text-center p-4 sm:p-5 md:py-4 border border-stone-100 md:border-stone-200/40 bg-stone-50/40 md:bg-stone-50/20"
             >
-              <span className="block font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#D4AF37] tracking-tight">
+              <span className="block font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#D4AF37] tracking-tight">
                 {stat.number}
               </span>
-              <span className="block font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-stone-600 font-medium mt-2">
+              <span className="block font-mono text-[9px] sm:text-[10px] md:text-xs uppercase tracking-[0.2em] text-stone-600 font-medium mt-1.5 leading-tight">
                 {stat.label}
               </span>
             </motion.div>
