@@ -1,0 +1,8 @@
+{
+  "name": "FSIA National Awards Portal",
+  "description": "The official premium portal for the Federation of Star India Awards, showcasing state and city winners, project achievements, and global honors.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
