@@ -7,6 +7,7 @@ import RegistrationModal from "./RegistrationModal";
 import HeroSection from "./HeroSection";
 import StatsGrid from "./StatsGrid";
 import AwardSeasonTimeline from "./AwardSeasonTimeline";
+import TestimonialSlider from "./TestimonialSlider";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -156,7 +157,10 @@ export default function HomePage() {
       {/* SECTION 4: Interactive Award Season Timeline */}
       <AwardSeasonTimeline />
 
-      {/* SECTION 5: Gallery Carousel Section */}
+      {/* SECTION 5: Previous Winners Success Stories Slider */}
+      <TestimonialSlider />
+
+      {/* SECTION 6: Gallery Carousel Section */}
       <GalleryCarousel />
 
       {/* Unified Registration & Applications Hub Modal Overlay */}
