@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import InfluencerHeader from "./components/InfluencerHeader";
+import PremiumHeader from "./components/PremiumHeader";
 import InfluencerFooterTabs from "./components/InfluencerFooterTabs";
 import HomePage from "./components/HomePage";
 import {
@@ -40,8 +40,8 @@ export default function App() {
       <ScrollToTop />
       <div className="bg-[#FAF9F6] min-h-screen text-stone-900 flex flex-col font-sans pt-16 lg:pt-20">
         
-        {/* Requirement 1: Influencer Header */}
-        <InfluencerHeader />
+        {/* Requirement 1: Premium Header */}
+        <PremiumHeader />
 
         {/* Global Page Layout with padding for fixed header and mobile bottom bar */}
         <main className="flex-grow pb-16 md:pb-0">
