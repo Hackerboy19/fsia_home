@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { Award, Menu, X, ChevronDown, Sparkles, UserPlus, HelpCircle, Users, Newspaper, Trophy, Image, ArrowUpRight } from "lucide-react";
+import { Award, Menu, X, ChevronDown, Sparkles, UserPlus, HelpCircle, Users, Newspaper, Trophy, Image, ArrowUpRight, Search } from "lucide-react";
+import SearchModal from "./SearchModal";
 
 export default function InfluencerHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [isRegDropdownOpen, setIsRegDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -35,6 +37,18 @@ export default function InfluencerHeader() {
     setIsRegDropdownOpen(false);
   }, [location.pathname]);
 
+  // Global Ctrl+K / Cmd+K listener for opening search
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const navTabs = [
     { label: "Home", path: "/" },
     { label: "About", path: "/about" },
@@ -47,8 +61,11 @@ export default function InfluencerHeader() {
         { label: "Super Women Title", path: "/register?category=super-women" },
         { label: "Business Awards", path: "/register?category=business" },
         { label: "Forever Miss India", path: "/register?category=miss-india" },
-        { label: "Forever Mrs India", path: "/register?category=mrs-india" },
-        { label: "Forever Miss Teen India", path: "/register?category=miss-teen-india" }
+        { label: "Mrs India", path: "/register?category=mrs-india" },
+        { label: "Miss Teen India", path: "/register?category=miss-teen-india" },
+        { label: "Mr India", path: "/register?category=mr-india" },
+        { label: "Mrs World", path: "/register?category=mrs-world" },
+        { label: "Fashion Week", path: "/register?category=fashion-week" }
       ]
     },
     { label: "FAQ", path: "/nomination-guide" },
@@ -154,6 +171,16 @@ export default function InfluencerHeader() {
 
           {/* Right: CTA button & Mobile Hamburger trigger */}
           <div className="flex items-center space-x-4">
+            {/* Search Trigger Icon Button */}
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2.5 text-stone-700 hover:text-[#D4AF37] focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer transition-colors"
+              title="Search winners & projects (Ctrl+K)"
+              aria-label="Open global registry search"
+            >
+              <Search size={20} className="stroke-[1.8]" />
+            </button>
+
             <Link
               to="/register"
               className="hidden sm:inline-flex items-center space-x-2 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-stone-950 font-mono font-bold text-[10px] uppercase tracking-widest px-5 py-2.5 shadow-md shadow-amber-500/10 hover:shadow-lg hover:shadow-amber-500/20 active:scale-95 transition-all cursor-pointer"
@@ -278,6 +305,13 @@ export default function InfluencerHeader() {
               </div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* Global Real-time Search Overlay */}
+      <AnimatePresence>
+        {isSearchOpen && (
+          <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
         )}
       </AnimatePresence>
     </>

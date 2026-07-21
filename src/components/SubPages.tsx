@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "motion/react";
-import { Award, Compass, Star, ChevronRight, CheckCircle2, Shield, Calendar, Phone, Mail, MapPin, Send, HelpCircle, ArrowRight, User, Briefcase, FileText, Globe } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
+import { Award, Compass, Star, ChevronRight, CheckCircle2, Shield, Calendar, Phone, Mail, MapPin, Send, HelpCircle, ArrowRight, User, Briefcase, FileText, Globe, ChevronDown, Search, Check } from "lucide-react";
 
 // Standard Header for Subpages
 function SubpageHero({ title, category, description }: { title: string; category: string; description: string }) {
@@ -432,18 +432,81 @@ export function ContactPage() {
 
 // 7. REGISTER PAGE (PROMINENT GOLD REGISTER BUTTON TARGET)
 export function RegisterPage() {
+  const location = useLocation();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const categories = [
+    "Super Heroes Title",
+    "Super Women Title",
+    "Business Awards",
+    "Forever Miss India",
+    "Mrs India",
+    "Miss Teen India",
+    "Mr India",
+    "Mrs World",
+    "Fashion Week",
+    "Social Media Influencer Award",
+    "Outstanding Youth Icon Award",
+    "International Laurels & Scientific Innovation",
+    "Star Artist, Music & Film Award",
+    "Health, Medicine & Wellness Leadership",
+    "Educational & Academic Excellence Honor",
+    "Community Upliftment, CSR & NGO Leader",
+    "Corporate Governance & Executive of the Year",
+    "Traditional Heritage Preservation & Crafts Honor"
+  ];
+
   const [formData, setFormData] = useState({
-    name: "", email: "", phone: "", category: "Social Impact Initiatives", location: "", narrative: "", links: ""
+    name: "", email: "", phone: "", category: "Super Heroes Title", location: "", narrative: "", links: ""
   });
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [categorySearch, setCategorySearch] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const catParam = params.get("category");
+    if (catParam) {
+      const mapping: { [key: string]: string } = {
+        "super-heroes": "Super Heroes Title",
+        "super-women": "Super Women Title",
+        "business": "Business Awards",
+        "miss-india": "Forever Miss India",
+        "mrs-india": "Mrs India",
+        "miss-teen-india": "Miss Teen India",
+        "mr-india": "Mr India",
+        "mrs-world": "Mrs World",
+        "fashion-week": "Fashion Week",
+        "influencer": "Social Media Influencer Award",
+        "youth": "Outstanding Youth Icon Award"
+      };
+      if (mapping[catParam]) {
+        setFormData(prev => ({ ...prev, category: mapping[catParam] }));
+      }
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSuccess(true);
     // Reset
-    setFormData({ name: "", email: "", phone: "", category: "Social Impact Initiatives", location: "", narrative: "", links: "" });
+    setFormData({ name: "", email: "", phone: "", category: "Super Heroes Title", location: "", narrative: "", links: "" });
     setTimeout(() => setIsSuccess(false), 8000);
   };
+
+  const filteredCategories = categories.filter(cat =>
+    cat.toLowerCase().includes(categorySearch.toLowerCase())
+  );
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="bg-[#0a0a0a] min-h-screen text-white">
@@ -508,21 +571,77 @@ export function RegisterPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              {/* Custom Elegant Dropdown for Award Category */}
+              <div className="space-y-2" ref={dropdownRef}>
                 <label className="text-[10px] uppercase tracking-widest font-mono text-white/40 block">Award Category</label>
                 <div className="relative">
-                  <Briefcase className="absolute left-3.5 top-3.5 text-white/20" size={14} />
-                  <select
-                    value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full bg-[#0d0d0d] border border-white/10 rounded-none py-2.5 pl-10 pr-4 text-xs focus:outline-none focus:border-[#D4AF37] text-white/70 font-sans font-light"
+                  <button
+                    type="button"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="w-full bg-[#0d0d0d] border border-white/10 rounded-none py-2.5 pl-10 pr-10 text-xs text-left focus:outline-none focus:border-[#D4AF37] text-white font-sans font-light flex items-center justify-between min-h-[38px] cursor-pointer"
                   >
-                    <option>Social Impact Initiatives</option>
-                    <option>Digital & Tech Innovation</option>
-                    <option>Art, Fashion & Culture</option>
-                    <option>Youth Leadership Awards</option>
-                    <option>Global Business Honors</option>
-                  </select>
+                    <div className="flex items-center space-x-2">
+                      <Briefcase className="text-white/20" size={14} />
+                      <span className="truncate">{formData.category}</span>
+                    </div>
+                    <ChevronDown size={14} className={`text-white/40 transform transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`} />
+                  </button>
+
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-0 right-0 mt-1 bg-[#121212] border border-white/10 shadow-2xl z-50 max-h-64 overflow-y-auto rounded-none"
+                      >
+                        {/* Search field inside dropdown */}
+                        <div className="p-2 border-b border-white/10 sticky top-0 bg-[#121212] z-10 flex items-center">
+                          <Search size={12} className="text-white/30 mr-2 shrink-0" />
+                          <input
+                            type="text"
+                            value={categorySearch}
+                            onChange={(e) => setCategorySearch(e.target.value)}
+                            placeholder="Filter categories..."
+                            className="w-full bg-transparent text-xs text-white focus:outline-none font-sans font-light"
+                            onClick={(e) => e.stopPropagation()}
+                          />
+                        </div>
+
+                        {/* List items */}
+                        <div className="py-1">
+                          {filteredCategories.map((cat) => {
+                            const isSelected = formData.category === cat;
+                            return (
+                              <button
+                                key={cat}
+                                type="button"
+                                onClick={() => {
+                                  setFormData(prev => ({ ...prev, category: cat }));
+                                  setIsDropdownOpen(false);
+                                  setCategorySearch("");
+                                }}
+                                className={`w-full text-left px-4 py-2.5 text-xs font-sans transition-colors border-b border-white/5 last:border-0 flex items-center justify-between cursor-pointer ${
+                                  isSelected 
+                                    ? "bg-[#D4AF37] text-black font-semibold" 
+                                    : "text-white/70 hover:bg-white/5 hover:text-white"
+                                }`}
+                              >
+                                <span>{cat}</span>
+                                {isSelected && <Check className="w-3.5 h-3.5 text-black" />}
+                              </button>
+                            );
+                          })}
+                          {filteredCategories.length === 0 && (
+                            <div className="px-4 py-3 text-xs text-white/40 text-center font-mono font-light">
+                              No categories found
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
 

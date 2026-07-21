@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useMotionValue, useTransform, AnimatePresence } from "motion/react";
 import { Award, Sparkles, ArrowRight, Star, Compass, ShieldCheck, CheckCircle2, ArrowUpRight, Users, Trophy, ChevronRight, ChevronLeft, Quote } from "lucide-react";
+import GalleryCarousel from "./GalleryCarousel";
 
 // Standard, high-performance 3D Parallax Tilt Card Component using Framer Motion (safely compatible with React 19)
 function TiltCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -906,6 +907,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Gallery Carousel */}
+      <GalleryCarousel />
 
       {/* EMINENT NEWS & MEDIA COVERAGE SECTION (Requirement 2: Horizontal snap carousel on mobile) */}
       <section id="news-coverage" className="py-12 sm:py-24 bg-white border-t border-stone-200">
