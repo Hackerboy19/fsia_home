@@ -29,7 +29,7 @@ export default function HeroSection() {
           className="inline-flex items-center space-x-2 bg-[#D4AF37]/15 border border-[#D4AF37]/40 px-4 py-2"
         >
           <Sparkles className="w-4 h-4 text-[#D4AF37] animate-pulse" />
-          <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.25em] text-[#D4AF37] font-bold">
+          <span className="font-mono text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
             Federation of Star India
           </span>
         </motion.div>
@@ -68,7 +68,7 @@ export default function HeroSection() {
             href="https://www.fsia.in/top-beauty-pageant-sites.php"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-4.5 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-stone-950 font-mono font-bold text-xs uppercase tracking-[0.2em] shadow-lg shadow-amber-500/10 hover:shadow-xl hover:shadow-amber-500/20 active:scale-95 transition-all text-center cursor-pointer min-h-[48px] flex items-center justify-center border border-transparent"
+            className="w-full sm:w-auto px-8 py-4.5 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-stone-950 font-mono font-bold text-xs uppercase tracking-widest shadow-lg shadow-amber-500/10 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:-translate-y-1 active:scale-95 transition-all duration-300 text-center cursor-pointer min-h-[48px] flex items-center justify-center border border-transparent"
           >
             Apply for Pageant
           </motion.a>
@@ -79,7 +79,7 @@ export default function HeroSection() {
             href="https://www.fsia.in/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-4.5 border border-white hover:border-[#D4AF37] text-white hover:text-[#D4AF37] font-mono font-bold text-xs uppercase tracking-[0.2em] hover:bg-white/5 active:scale-95 transition-all text-center cursor-pointer min-h-[48px] flex items-center justify-center"
+            className="w-full sm:w-auto px-8 py-4.5 border border-white hover:border-[#D4AF37] text-white hover:text-[#D4AF37] font-mono font-bold text-xs uppercase tracking-widest hover:bg-white/5 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:-translate-y-1 active:scale-95 transition-all duration-300 text-center cursor-pointer min-h-[48px] flex items-center justify-center"
           >
             Apply for Awards
           </motion.a>

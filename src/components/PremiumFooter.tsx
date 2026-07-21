@@ -298,9 +298,14 @@ export default function PremiumFooter() {
 
         {/* BOTTOM METADATA BAR */}
         <div className="border-t border-stone-200/60 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] text-stone-400 font-mono tracking-widest uppercase font-bold">
-            &copy; {currentYear} FSIA PLATFORM. ALL RIGHTS RESERVED.
-          </p>
+          <div className="space-y-1">
+            <p className="text-[10px] text-stone-400 font-mono tracking-widest uppercase font-bold">
+              &copy; {currentYear} FSIA PLATFORM. ALL RIGHTS RESERVED.
+            </p>
+            <p className="text-[9px] text-stone-400 font-mono">
+              Designed and maintained by Forever star india. Inquiries: secretariat@fsia.in
+            </p>
+          </div>
           <div className="flex items-center space-x-6 text-[10px] font-mono text-stone-400 tracking-wider">
             <span className="flex items-center space-x-1">
               <Mail size={12} className="text-stone-300" />

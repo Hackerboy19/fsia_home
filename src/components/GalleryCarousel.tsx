@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { motion } from "motion/react";
 
 interface GalleryImage {
   id: number;
@@ -79,7 +80,13 @@ export default function GalleryCarousel() {
 
   return (
     <section id="gallery-carousel-section" className="py-24 bg-[#FAFAFA] border-t border-stone-200/60 overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+      >
         
         {/* Title and Controls Header block */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -139,7 +146,7 @@ export default function GalleryCarousel() {
                   src={image.url}
                   alt={image.title}
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover transform scale-100 group-hover:scale-103 transition-transform duration-700 ease-out"
+                  className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
 
                 <div className="absolute bottom-0 inset-x-0 p-5 z-20 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
@@ -155,7 +162,7 @@ export default function GalleryCarousel() {
           ))}
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -64,24 +64,24 @@ export default function PremiumHeader({ onSearchClick }: PremiumHeaderProps) {
       id="premium-nav-header"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-[#FAFAFA]/95 backdrop-blur-md border-b border-stone-200/80 shadow-sm py-3"
-          : "bg-[#FAFAFA]/80 backdrop-blur-sm border-b border-transparent py-5"
+          ? "bg-white md:bg-[#FAFAFA]/95 md:backdrop-blur-md border-b border-stone-200/80 shadow-sm py-2 md:py-3"
+          : "bg-white md:bg-[#FAFAFA]/80 md:backdrop-blur-sm border-b border-stone-100 md:border-transparent py-2.5 md:py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           
           {/* Left: Text Logo */}
-          <Link to="/" className="flex items-center space-x-2.5 group">
-            <div className="relative">
-              <Trophy className="w-5 h-5 text-[#D4AF37] transition-transform duration-500 group-hover:rotate-12" />
+          <Link to="/" className="flex items-center space-x-1.5 sm:space-x-2.5 group">
+            <div className="relative flex-shrink-0">
+              <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37] transition-transform duration-500 group-hover:rotate-12" />
               <div className="absolute inset-0 bg-[#D4AF37]/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-sm md:text-base font-bold tracking-[0.2em] text-[#171717] uppercase">
+              <span className="font-serif text-[11px] sm:text-sm md:text-base font-bold tracking-[0.12em] sm:tracking-[0.2em] text-[#171717] uppercase whitespace-nowrap">
                 Forever Star India
               </span>
-              <span className="text-[7.5px] font-mono uppercase tracking-[0.3em] text-[#D4AF37] font-bold">
+              <span className="text-[6.5px] sm:text-[7.5px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#D4AF37] font-bold whitespace-nowrap">
                 Elite National Registry
               </span>
             </div>
@@ -161,7 +161,7 @@ export default function PremiumHeader({ onSearchClick }: PremiumHeaderProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-stone-950/70 backdrop-blur-md z-[99] md:hidden"
+              className="fixed inset-0 bg-neutral-950/80 backdrop-blur-xl z-[99] md:hidden border-b border-white/5"
             />
 
             {/* Content Drawer: 100% Solid Opaque Background at z-[100] */}

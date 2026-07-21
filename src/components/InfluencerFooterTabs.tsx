@@ -227,10 +227,15 @@ export default function InfluencerFooterTabs() {
           </div>
 
           {/* Footer Bottom Credentials */}
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 text-[11px] font-mono text-stone-500">
-            <p>
-              &copy; {currentYear} Forever Star India Awards (FSIA). All Rights Reserved.
-            </p>
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 text-[11px] font-mono text-stone-500 border-t border-stone-800">
+            <div className="space-y-1 text-center sm:text-left">
+              <p>
+                &copy; {currentYear} Forever Star India Awards (FSIA). All Rights Reserved.
+              </p>
+              <p className="text-[10px] text-stone-400">
+                Designed and maintained by Forever star india. Inquiries: secretariat@fsia.in
+              </p>
+            </div>
             <div className="flex items-center space-x-6">
               <button 
                 onClick={scrollToTop} 
