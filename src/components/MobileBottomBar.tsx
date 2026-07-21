@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion } from "motion/react";
 import { Home, Briefcase, Trophy, Sparkles, Menu } from "lucide-react";
 
 export default function MobileBottomBar() {
@@ -53,32 +54,32 @@ export default function MobileBottomBar() {
   return (
     <div
       id="mobile-bottom-navigation-bar"
-      className="md:hidden fixed bottom-0 inset-x-0 h-16 bg-neutral-950/90 backdrop-blur-md border-t border-[#D4AF37]/35 z-50 flex items-center justify-around px-2 pb-safe shadow-[0_-4px_24px_rgba(0,0,0,0.5)]"
+      className="md:hidden fixed bottom-0 inset-x-0 h-16 bg-neutral-950/95 backdrop-blur-md border-t border-[#D4AF37]/35 z-50 flex items-center justify-around px-2 pb-safe shadow-[0_-4px_24px_rgba(0,0,0,0.5)]"
     >
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.path && !tab.onClick;
         
         const content = (
-          <div className="flex flex-col items-center justify-center space-y-1 py-1 w-full h-full min-h-[44px]">
+          <div className="flex flex-col items-center justify-center space-y-0.5 py-1 w-full h-full min-h-[48px]">
             <div
-              className={`p-1.5 rounded-sm transition-all duration-300 ${
+              className={`p-1 rounded-md transition-all duration-300 ${
                 tab.isAction
-                  ? "bg-[#D4AF37] text-black shadow-lg shadow-[#D4AF37]/20 scale-105"
+                  ? "bg-gradient-to-r from-[#BF953F] to-[#B38728] text-stone-950 shadow-md shadow-[#D4AF37]/20 scale-105"
                   : isActive
                   ? "text-[#D4AF37]"
                   : "text-stone-400 group-hover:text-stone-200"
               }`}
             >
-              <Icon size={tab.isAction ? 18 : 20} className={tab.isAction ? "animate-pulse" : ""} />
+              <Icon size={tab.isAction ? 16 : 18} className={tab.isAction ? "animate-pulse" : ""} />
             </div>
             <span
-              className={`text-[9px] font-medium tracking-wider uppercase ${
+              className={`text-[8.5px] font-mono tracking-wider uppercase font-semibold ${
                 tab.isAction
                   ? "text-[#D4AF37] font-bold"
                   : isActive
-                  ? "text-[#D4AF37] font-semibold"
-                  : "text-stone-400 group-hover:text-stone-200"
+                  ? "text-[#D4AF37] font-bold"
+                  : "text-stone-500 group-hover:text-stone-300"
               }`}
             >
               {tab.label}
@@ -88,26 +89,34 @@ export default function MobileBottomBar() {
 
         if (tab.onClick) {
           return (
-            <button
+            <motion.button
               key={tab.label}
               onClick={tab.onClick}
-              className="flex-1 flex flex-col items-center justify-center focus:outline-none group cursor-pointer"
+              whileTap={{ scale: 0.9 }}
+              className="flex-1 flex flex-col items-center justify-center h-full focus:outline-none group cursor-pointer"
+              style={{ minWidth: "48px", minHeight: "48px" }}
               aria-label={tab.label}
             >
               {content}
-            </button>
+            </motion.button>
           );
         }
 
         return (
-          <Link
+          <motion.div
             key={tab.label}
-            to={tab.path}
-            className="flex-1 flex flex-col items-center justify-center focus:outline-none group"
-            aria-label={tab.label}
+            whileTap={{ scale: 0.9 }}
+            className="flex-1 h-full"
           >
-            {content}
-          </Link>
+            <Link
+              to={tab.path}
+              className="w-full h-full flex flex-col items-center justify-center focus:outline-none group"
+              style={{ minWidth: "48px", minHeight: "48px" }}
+              aria-label={tab.label}
+            >
+              {content}
+            </Link>
+          </motion.div>
         );
       })}
     </div>

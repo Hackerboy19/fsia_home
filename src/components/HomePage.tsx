@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, Trophy, Award, Users, ArrowRight } from "lucide-react";
 import GalleryCarousel from "./GalleryCarousel";
+import RegistrationModal from "./RegistrationModal";
 
 export default function HomePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<"pageant" | "awards">("pageant");
+
+  const openSelection = (type: "pageant" | "awards") => {
+    setModalType(type);
+    setIsModalOpen(true);
+  };
   return (
     <div id="fsia-homepage" className="bg-[#FAFAFA] text-[#171717] font-sans overflow-hidden">
       
@@ -64,23 +73,25 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-4 w-full px-4"
           >
-            {/* Gold Solid Button */}
-            <Link
-              to="/register?category=miss-india"
-              className="w-full sm:w-auto px-8 py-4.5 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-stone-950 font-mono font-bold text-xs uppercase tracking-[0.2em] shadow-lg shadow-amber-500/10 hover:shadow-xl hover:shadow-amber-500/20 active:scale-95 transition-all text-center"
+            {/* Gold Solid Button with Haptic Tap */}
+            <motion.button
+              whileTap={{ scale: 0.94 }}
+              onClick={() => openSelection("pageant")}
+              className="w-full sm:w-auto px-8 py-4.5 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-stone-950 font-mono font-bold text-xs uppercase tracking-[0.2em] shadow-lg shadow-amber-500/10 hover:shadow-xl hover:shadow-amber-500/20 active:scale-95 transition-all text-center cursor-pointer min-h-[48px] flex items-center justify-center"
             >
               Apply for Pageant
-            </Link>
+            </motion.button>
 
-            {/* Dark Outline Button */}
-            <Link
-              to="/register?category=business"
-              className="w-full sm:w-auto px-8 py-4.5 border border-white hover:border-[#D4AF37] text-white hover:text-[#D4AF37] font-mono font-bold text-xs uppercase tracking-[0.2em] hover:bg-white/5 active:scale-95 transition-all text-center"
+            {/* Dark Outline Button with Haptic Tap */}
+            <motion.button
+              whileTap={{ scale: 0.94 }}
+              onClick={() => openSelection("awards")}
+              className="w-full sm:w-auto px-8 py-4.5 border border-white hover:border-[#D4AF37] text-white hover:text-[#D4AF37] font-mono font-bold text-xs uppercase tracking-[0.2em] hover:bg-white/5 active:scale-95 transition-all text-center cursor-pointer min-h-[48px] flex items-center justify-center"
             >
               Apply for Awards
-            </Link>
+            </motion.button>
           </motion.div>
 
         </div>
@@ -163,13 +174,14 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <Link
-                to="/register?category=miss-india"
-                className="inline-flex items-center space-x-2 text-[11px] font-mono uppercase tracking-[0.2em] font-bold text-[#171717] group-hover:text-[#D4AF37] transition-colors"
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => openSelection("pageant")}
+                className="inline-flex items-center space-x-2 text-[11px] font-mono uppercase tracking-[0.2em] font-bold text-[#171717] group-hover:text-[#D4AF37] transition-colors cursor-pointer text-left min-h-[44px]"
               >
                 <span>View Pageants</span>
                 <ArrowRight size={13} className="transform group-hover:translate-x-1.5 transition-transform duration-300" />
-              </Link>
+              </motion.button>
             </div>
 
             {/* Card 2: Awards */}
@@ -191,13 +203,14 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <Link
-                to="/register?category=business"
-                className="inline-flex items-center space-x-2 text-[11px] font-mono uppercase tracking-[0.2em] font-bold text-[#171717] group-hover:text-[#D4AF37] transition-colors"
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => openSelection("awards")}
+                className="inline-flex items-center space-x-2 text-[11px] font-mono uppercase tracking-[0.2em] font-bold text-[#171717] group-hover:text-[#D4AF37] transition-colors cursor-pointer text-left min-h-[44px]"
               >
                 <span>View Awards</span>
                 <ArrowRight size={13} className="transform group-hover:translate-x-1.5 transition-transform duration-300" />
-              </Link>
+              </motion.button>
             </div>
 
           </div>
@@ -206,6 +219,17 @@ export default function HomePage() {
 
       {/* SECTION 4: Gallery Carousel Section */}
       <GalleryCarousel />
+
+      {/* Unified Registration & Applications Hub Modal Overlay */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <RegistrationModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            initialTab={modalType}
+          />
+        )}
+      </AnimatePresence>
 
     </div>
   );

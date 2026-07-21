@@ -478,7 +478,14 @@ export function RegisterPage() {
         "mrs-world": "Mrs World",
         "fashion-week": "Fashion Week",
         "influencer": "Social Media Influencer Award",
-        "youth": "Outstanding Youth Icon Award"
+        "youth": "Outstanding Youth Icon Award",
+        "scientific-innovation": "International Laurels & Scientific Innovation",
+        "art-music": "Star Artist, Music & Film Award",
+        "health-wellness": "Health, Medicine & Wellness Leadership",
+        "education-excellence": "Educational & Academic Excellence Honor",
+        "community-upliftment": "Community Upliftment, CSR & NGO Leader",
+        "corporate-governance": "Corporate Governance & Executive of the Year",
+        "heritage-preservation": "Traditional Heritage Preservation & Crafts Honor"
       };
       if (mapping[catParam]) {
         setFormData(prev => ({ ...prev, category: mapping[catParam] }));

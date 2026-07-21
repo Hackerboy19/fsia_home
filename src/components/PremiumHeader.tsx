@@ -16,13 +16,35 @@ export default function PremiumHeader() {
         setIsScrolled(false);
       }
     };
+
+    const handleToggleMenu = () => {
+      setIsOpen((prev) => !prev);
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("toggle-mobile-menu", handleToggleMenu);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("toggle-mobile-menu", handleToggleMenu);
+    };
   }, []);
 
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
+
+  // Prevent body scroll when mobile drawer is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const navItems = [
     { label: "Home", path: "/" },
@@ -125,19 +147,20 @@ export default function PremiumHeader() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-stone-950/70 backdrop-blur-md z-[99] md:hidden"
             />
 
-            {/* Content Drawer */}
+            {/* Content Drawer: 100% Solid Opaque Background at z-[100] */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.35, ease: "easeOut" }}
-              className="fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-[#FAFAFA] border-l border-stone-200 z-50 p-6 flex flex-col justify-between shadow-2xl md:hidden"
+              className="fixed top-0 right-0 bottom-0 w-4/5 max-w-sm bg-white z-[100] p-6 flex flex-col justify-between shadow-2xl md:hidden"
             >
-              <div className="space-y-8">
-                <div className="flex items-center justify-between border-b border-stone-200 pb-5">
+              <div className="space-y-6">
+                {/* Top cohesive brand bar without dividing lines */}
+                <div className="flex items-center justify-between pb-2 bg-white">
                   <div className="flex flex-col">
                     <span className="font-serif text-sm font-bold tracking-[0.15em] text-[#171717] uppercase">
                       FSIA
@@ -148,21 +171,21 @@ export default function PremiumHeader() {
                   </div>
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="p-1.5 text-stone-500 hover:text-[#171717] cursor-pointer focus:outline-none"
+                    className="p-2 text-stone-500 hover:text-[#171717] cursor-pointer focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center"
                     aria-label="Close menu"
                   >
                     <X size={20} />
                   </button>
                 </div>
 
-                {/* Mobile Navigation List */}
-                <nav className="flex flex-col space-y-4">
+                {/* Mobile Navigation List with clean, spacious py-4 flex spacing and no border-b */}
+                <nav className="flex flex-col">
                   {navItems.map((item) => (
                     <Link
                       key={item.label}
                       to={item.path}
                       onClick={() => setIsOpen(false)}
-                      className="py-2.5 text-xs font-mono font-bold uppercase tracking-[0.2em] text-stone-700 hover:text-[#D4AF37] transition-colors border-b border-stone-100 last:border-0"
+                      className="py-4 text-xs font-mono font-bold uppercase tracking-[0.2em] text-stone-700 hover:text-[#D4AF37] transition-colors focus:outline-none"
                     >
                       {item.label}
                     </Link>
@@ -175,7 +198,7 @@ export default function PremiumHeader() {
                 <Link
                   to="/register"
                   onClick={() => setIsOpen(false)}
-                  className="w-full py-4 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-stone-950 font-mono font-bold text-center text-xs uppercase tracking-[0.25em] flex items-center justify-center space-x-2"
+                  className="w-full py-4 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-stone-950 font-mono font-bold text-center text-xs uppercase tracking-[0.25em] flex items-center justify-center space-x-2 shadow-md"
                 >
                   <Sparkles size={12} />
                   <span>Register Now</span>
