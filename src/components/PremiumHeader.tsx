@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Sparkles, Trophy } from "lucide-react";
+import { Menu, X, Sparkles, Trophy, Search } from "lucide-react";
 
-export default function PremiumHeader() {
+interface PremiumHeaderProps {
+  onSearchClick?: () => void;
+}
+
+export default function PremiumHeader({ onSearchClick }: PremiumHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
@@ -116,6 +120,16 @@ export default function PremiumHeader() {
 
           {/* Right: Gold CTA Button & Mobile Trigger */}
           <div className="flex items-center space-x-4">
+            {/* Search Icon Trigger */}
+            <button
+              id="global-search-trigger"
+              onClick={onSearchClick}
+              className="p-2 text-stone-600 hover:text-[#D4AF37] hover:bg-stone-100/50 rounded-full transition-all focus:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+              aria-label="Open Global Search"
+            >
+              <Search size={20} className="transition-transform hover:scale-105" />
+            </button>
+
             <Link
               to="/register"
               className="hidden sm:inline-flex items-center space-x-2 bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#B38728] text-stone-950 font-mono font-bold text-[10px] uppercase tracking-[0.2em] px-6 py-3 shadow-md shadow-amber-500/10 hover:shadow-lg hover:shadow-amber-500/20 active:scale-95 transition-all duration-300"

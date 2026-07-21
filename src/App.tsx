@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import PremiumHeader from "./components/PremiumHeader";
+import GlobalSearchModal from "./components/GlobalSearchModal";
 import InfluencerFooterTabs from "./components/InfluencerFooterTabs";
 import HomePage from "./components/HomePage";
 import {
@@ -35,13 +36,18 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
   return (
     <Router>
       <ScrollToTop />
       <div className="bg-[#FAF9F6] min-h-screen text-stone-900 flex flex-col font-sans pt-16 lg:pt-20">
         
         {/* Requirement 1: Premium Header */}
-        <PremiumHeader />
+        <PremiumHeader onSearchClick={() => setIsSearchOpen(true)} />
+
+        {/* Global Search Overlay Modal */}
+        <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
         {/* Global Page Layout with padding for fixed header and mobile bottom bar */}
         <main className="flex-grow pb-16 md:pb-0">
